@@ -82,9 +82,8 @@ public class AppMenu {
                             false      // eliminado por defecto
                         );
 
-
-                        pacienteService.insertar(paciente);
                         historiaService.insertar(hc);
+                        pacienteService.insertar(paciente);
                         System.out.println("✅ Paciente creado con historia clínica.");
                     }
 
