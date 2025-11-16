@@ -92,7 +92,7 @@ public void iniciar() {
             LocalDate fecha = validarFecha("Fecha nacimiento (dd/MM/yyyy): ");              
             System.out.println("\n" + CYAN + "--- Datos de Historia Clínica ---" + RESET);
             System.out.println("""
-                    Grupo sanguíneo (número): \n
+                    Grupo Sanguíneo  (ingrese código 0-8):  \n
                     0 = Desconocido           
                     1 = A+
                     2 = A-
@@ -270,11 +270,13 @@ public void iniciar() {
             return;
         }
         System.out.println("\nHistoria clinica encontrada:");
-        System.out.println(hc);         
-        /* System.out.println("\n"); */
+        System.out.println(hc);
+        System.out.println("\n"+ CYAN + "Dejar vacío para no modificar:" + RESET);   
+        System.out.print("Grupo Sanguíneo actual:(" + hc.getGrupoSanguineo().getDescripcion() + "): \n");  
+        System.out.print("Nuevo Grupo Sanguíneo  (ingrese código 0-8): ");
+        System.out.println("\n");  
 
-                    System.out.println("""
-                    Grupo sanguíneo (número): \n
+                    System.out.println("""                    
                     0 = Desconocido           
                     1 = A+
                     2 = A-
@@ -286,20 +288,22 @@ public void iniciar() {
                     8 = 0-                    
                     """);
 
-            GrupoSanguineo grupo = validarGrupoSanguineo("Código (0-8): ");
-            hc.setGrupoSanguineo(grupo);
+        GrupoSanguineo grupo = validarGrupoSanguineo("Código (0-8): ");
+        if (grupo != null) hc.setGrupoSanguineo(grupo);
 
-        System.out.print("Nuevo antecedente: ");
-        hc.setAntecedentes(scanner.nextLine());
+        System.out.print("Nuevo antecedente (" + hc.getAntecedentes() + "): ");
+        String antecedente = scanner.nextLine().trim();
+        if (!antecedente.isEmpty()) hc.setAntecedentes(antecedente);
 
-        System.out.print("Nueva medicación: ");
-        hc.setMedicacionActual(scanner.nextLine());
+        System.out.print("Nueva medicación (" + hc.getMedicacionActual() + "): ");
+        String medicacion = scanner.nextLine().trim();
+        if (!medicacion.isEmpty()) hc.setMedicacionActual(medicacion);
 
-        System.out.print("Nueva observación: ");
-        hc.setObservaciones(scanner.nextLine());
+        System.out.print("Nueva observación (" + hc.getObservaciones() + "): ");
+        String observaciones = scanner.nextLine().trim();
+        if (!observaciones.isEmpty()) hc.setObservaciones(observaciones);        
 
         historiaService.actualizar(hc);
-
         System.out.println(GREEN + "✔ Historia actualizada." + RESET);
     }
 
