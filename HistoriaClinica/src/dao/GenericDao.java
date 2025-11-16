@@ -8,5 +8,6 @@ public interface GenericDao<T> {
     void eliminar(int id)throws Exception;
     void recuperar(int id)throws Exception;
     T getById(int id)throws Exception;
+    T getByIdEliminado(int id)throws Exception;
     List<T> getAll()throws Exception;
 }

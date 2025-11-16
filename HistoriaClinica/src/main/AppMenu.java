@@ -182,18 +182,54 @@ public void iniciar() {
         }
     }
 
-    // 5. ELIMINAR PACIENTE    
+    // 5. ELIMINAR PACIENTE
     private void eliminarPaciente() throws Exception {
-        System.out.print("Ingrese ID del paciente a eliminar: ");
-        int id = Integer.parseInt(scanner.nextLine());
-        pacienteService.eliminar(id);
-        System.out.println(GREEN + "✔ Paciente eliminado (baja lógica)." + RESET);
+
+        int id = validarId("Ingrese ID del paciente a eliminar: "); 
+        Paciente p = pacienteService.getById(id);  
+
+        if (p == null) {
+            System.out.println(RED + "⚠ Paciente no encontrado." + RESET);
+            return;
+        }
+
+        System.out.println("\nPaciente encontrado:");
+        System.out.println(p);
+
+        System.out.print("\n¿Confirma la eliminación lógica? (S/N): ");
+        String confirma = scanner.nextLine().trim().toUpperCase();
+
+        if (!confirma.equals("S")) {
+            System.out.println(YELLOW + "↺ Operación cancelada." + RESET);
+            return;
+        }
+
+        pacienteService.eliminar(id);  
+        System.out.println(GREEN + "✔ Paciente eliminado." + RESET);
     }
 
     // 6. RECUPERAR PACIENTE
     private void recuperarPaciente() throws Exception {
-        System.out.print("Ingrese ID del paciente a recuperar: ");
-        int id = Integer.parseInt(scanner.nextLine());
+
+        int id = validarId("Ingrese ID del paciente a recuperar: "); 
+        Paciente p = pacienteService.getByIdEliminado(id);  
+
+        if (p == null) {
+            System.out.println(RED + "⚠ Paciente no encontrado." + RESET);
+            return;
+        }
+
+        System.out.println("\nPaciente encontrado:");
+        System.out.println(p);
+
+        System.out.print("\n¿Confirma la recuperación del paciente? (S/N): ");
+        String confirma = scanner.nextLine().trim().toUpperCase();
+
+        if (!confirma.equals("S")) {
+            System.out.println(YELLOW + "↺ Operación cancelada." + RESET);
+            return;
+        }
+
         pacienteService.recuperar(id);
         System.out.println(GREEN + "✔ Paciente recuperado." + RESET);
     }
@@ -230,7 +266,6 @@ public void iniciar() {
     }
 
     // VALIDACIONES
-
     private String validarNombre(String msg) {
         String valor;
         while (true) {
@@ -294,6 +329,19 @@ public void iniciar() {
         }
     }
 
+    private int validarId(String msg) {
+        while (true) {
+            System.out.print(msg);
+            String input = scanner.nextLine().trim();
+
+            if (!input.matches("^[0-9]+$")) {
+                System.out.println(RED + "❌ Id inválido, solo números." + RESET);
+                continue;
+            }
+
+            return Integer.parseInt(input);  // ✔ devuelve int
+        }
+    }
 
     private String optional(String s) {
         return s.trim().isEmpty() ? null : s;
