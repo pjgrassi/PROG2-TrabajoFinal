@@ -205,7 +205,7 @@ public void iniciar() {
     private void eliminarPaciente() throws Exception {
 
         int id = validarId("Ingrese ID del paciente a eliminar: "); 
-        Paciente p = pacienteService.getById(id);  
+        Paciente p = pacienteService.getById(id);
 
         if (p == null) {
             System.out.println(RED + "⚠ Paciente no encontrado." + RESET);
@@ -223,7 +223,8 @@ public void iniciar() {
             return;
         }
 
-        pacienteService.eliminar(id);  
+        pacienteService.eliminar(id);
+        historiaService.eliminar(id);  
         System.out.println(GREEN + "✔ Paciente eliminado." + RESET);
     }
 
@@ -250,6 +251,7 @@ public void iniciar() {
         }
 
         pacienteService.recuperar(id);
+        historiaService.recuperar(id);
         System.out.println(GREEN + "✔ Paciente recuperado." + RESET);
     }
 

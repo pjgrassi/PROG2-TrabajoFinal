@@ -65,6 +65,6 @@ public class HistoriaClinica extends Base{
 
     @Override
     public String toString() {
-        return PURPLE+"HistoriaClinica"+RESET+"{" + "nroHistoria = " + nroHistoria + ", grupoSanguineo = " + grupoSanguineo.getDescripcion() + ", antecedentes = " + antecedentes + ", medicacionActual = " + medicacionActual + ", observaciones = " + observaciones + '}';
+        return PURPLE+"HistoriaClinica"+RESET+"{" + "id = " + getId() + ", nroHistoria = " + nroHistoria + ", grupoSanguineo = " + grupoSanguineo.getDescripcion() + ", antecedentes = " + antecedentes + ", medicacionActual = " + medicacionActual + ", observaciones = " + observaciones + '}';
     }   
 }
