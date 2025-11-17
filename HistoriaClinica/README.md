@@ -268,9 +268,7 @@ HistoriaClinica{nroHistoria=30123456, grupoSanguineo=O-, antecedentes=Estado gri
 ┌───────────▼─────────────────────────┐
 │     Service Layer                   │
 │  (Lógica de negocio y validación)   │
-│   GenericService                    │
 │   PacienteService                   │
-│   HistoriaClinicaService            │
 └───────────┬─────────────────────────┘
             │
 ┌───────────▼─────────────────────────┐
